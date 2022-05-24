@@ -6,6 +6,7 @@ import {RecipeService} from './recipe.service';
 import {BrowserModule} from '@angular/platform-browser';
 import {MatCardModule} from '@angular/material/card';
 import {RecipeComponent} from './shared/recipe.component/recipe.component';
+import {MatSliderModule} from '@angular/material/slider';
 
 @NgModule({
     declarations: [
@@ -16,7 +17,8 @@ import {RecipeComponent} from './shared/recipe.component/recipe.component';
         RecipeListRoutingModule,
         HttpClientModule,
         BrowserModule,
-        MatCardModule
+        MatCardModule,
+        MatSliderModule,
     ],
     providers: [
         RecipeService

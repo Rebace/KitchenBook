@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Q3ilKFTQzZpvbRptfeXQ+bNMOL593fLD2WhEketNgKTUnjMJ0nYkHL3pFrx/ZdEt1sFpeDpcaBADz0akTQfpZw==",
+  "dgSpecHash": "XbGfK6nqNZlL3+dRZWLD8FaMwO7wq0lxoUMQN3EqCMtVzd0Xlyju85VbOk40sb8E+pIEijBKPGL6SGlq6CFFKA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Rebace\\Desktop\\project\\src\\KitchenBook.Infrastructure\\KitchenBook.Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\Rebace\\Desktop\\project — копия\\src\\KitchenBook.Infrastructure\\KitchenBook.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Rebace\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Rebace\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
