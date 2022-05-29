@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {Recipe} from '../recipe.interface';
 
 @Component({
     selector: 'tl-recipe',
@@ -7,6 +8,5 @@ import {Component, Input} from '@angular/core';
 })
 
 export class RecipeComponent {
-    // @ts-ignore
-    @Input() public recipe: Recipe;
+    @Input() public recipe!: Recipe;
 }

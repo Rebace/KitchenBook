@@ -10,7 +10,6 @@ namespace KitchenBook.Api
 {
     public class Program
     {
-        
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
@@ -18,9 +17,6 @@ namespace KitchenBook.Api
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
     }
 }

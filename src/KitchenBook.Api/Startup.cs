@@ -24,22 +24,20 @@ namespace KitchenBook.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<RecipeDbContext>(x =>
-               x.UseSqlServer(Configuration.GetConnectionString("RecipeConnection")));
+                x.UseSqlServer(Configuration.GetConnectionString("RecipeConnection")));
             services.AddScoped<IRecipeRepository, RecipeRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Recipe", Version = "v1" });
-            });
-            
+            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "Recipe", Version = "v1" }); });
+
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
                     builder =>
                     {
-                        builder.WithOrigins(new string[] { "http://localhost:4200", "http://yourdomain.com" }).AllowAnyMethod().AllowAnyHeader();
+                        builder.WithOrigins(new string[] { "http://localhost:4200", "http://yourdomain.com" })
+                            .AllowAnyMethod().AllowAnyHeader();
                     });
             });
         }
@@ -52,13 +50,11 @@ namespace KitchenBook.Api
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Recipe v1"));
             }
+
             app.UseCors("CorsPolicy");
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

@@ -15,7 +15,7 @@ export class RecipeListPageComponent implements OnInit {
     public recipes: Array<Recipe> = [];
 
     public ngOnInit(): void {
-        this.recipeService.GetAll().subscribe((raw: Recipe[]) => {
+        this.recipeService.getAll().subscribe((raw: Recipe[]) => {
             const recipes = <Array<Recipe>>raw;
             recipes.forEach(recipe => {
                 this.recipes.push(<Recipe>recipe);

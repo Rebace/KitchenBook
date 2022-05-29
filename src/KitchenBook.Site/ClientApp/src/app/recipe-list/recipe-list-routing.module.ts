@@ -1,6 +1,6 @@
-﻿import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { RecipeListPageComponent } from './recipe-list-page/recipe-list-page.component';
+﻿import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {RecipeListPageComponent} from './recipe-list-page/recipe-list-page.component';
 
 const routes: Routes = [
     {
@@ -15,5 +15,4 @@ const routes: Routes = [
     exports: [RouterModule]
 })
 export class RecipeListRoutingModule {
-
 }
