@@ -23,31 +23,26 @@ namespace KitchenBook.Api.Controllers
 
         [HttpGet]
         [Route("get-all")]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            List<Recipe> recipes = _recipeRepository.GetRecipeList();
+            List<Recipe> recipes = await _recipeRepository.GetRecipeList();
             return Ok(recipes.Select(x => x.Map()));
         }
 
         [HttpGet]
         [Route("{recipeId}")]
-        public IActionResult GetById(int recipeId)
+        public async Task<IActionResult> GetById(int recipeId)
         {
-            Recipe? recipe = _recipeRepository.GetById(recipeId);
-            if (recipe == null)
-            {
-                return NotFound();
-            }
-
+            Recipe recipe = await _recipeRepository.GetById(recipeId);
             return Ok(recipe.Map());
         }
 
         [HttpPost]
         [Route("create")]
-        public IActionResult Create([FromBody] RecipeDto recipeDto)
+        public async Task<IActionResult> Create([FromBody] RecipeDto recipeDto)
         {
             //Если без мапинга или надо просто  создавать объект используя recipeDto?
-            var createdRecipe = _recipeRepository.Create(new Recipe(recipeDto.Title, recipeDto.Description,
+            var createdRecipe = await _recipeRepository.Create(new Recipe(recipeDto.Title, recipeDto.Description,
                 recipeDto.CookingTime, recipeDto.Portions, recipeDto.Stars, recipeDto.Likes));
             _unitOfWork.Commit();
 
@@ -56,22 +51,13 @@ namespace KitchenBook.Api.Controllers
 
         [HttpDelete]
         [Route("{recipeId}/delete")]
-        public IActionResult Delete(int recipeId)
+        public async Task<IActionResult> Delete(int recipeId)
         {
-            Recipe? recipe = _recipeRepository.GetById(recipeId);
+            Recipe recipe = await _recipeRepository.GetById(recipeId);
 
-            if (recipe == null)
-            {
-                return BadRequest();
-            }
-            else
-            {
-                _recipeRepository.Delete(recipe);
-
-                _unitOfWork.Commit();
-
-                return NoContent();
-            }
+            _recipeRepository.Delete(recipe);
+            _unitOfWork.Commit();
+            return NoContent();
         }
     }
 }

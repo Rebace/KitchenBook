@@ -9,9 +9,9 @@ namespace KitchenBook.Infrastructure.Repository
 {
     public interface IRecipeRepository
     {
-        List<Recipe> GetRecipeList();
-        /*Task<Recipe>*/Recipe GetById(int id);
-        Recipe Create(Recipe todo);
+        Task<List<Recipe>> GetRecipeList();
+        Task<Recipe> GetById(int id);
+        Task<Recipe> Create(Recipe todo);
         void Delete(Recipe todo);
         void Update(Recipe todo);
     }

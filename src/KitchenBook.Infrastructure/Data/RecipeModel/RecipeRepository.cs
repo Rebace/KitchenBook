@@ -12,28 +12,28 @@ namespace KitchenBook.Infrastructure.Data.RecipeModel
         {
             _dbContext = dbContext;
         }
-        public List<Recipe> GetRecipeList()
+        public async Task<List<Recipe>> GetRecipeList()
         {
-            return _dbContext.Recipe.ToList();
+            return await _dbContext.Recipe.ToListAsync();
         }
 
-        public /*async Task<Recipe>*/Recipe GetById(int id)
+        public async Task<Recipe> GetById(int id)
         {
-            return /*await*/ _dbContext.Recipe./*SingleOrDefaultAsync*/SingleOrDefault(x => x.Id == id);
+            return await _dbContext.Recipe.SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        public Recipe Create(Recipe recipe)
+        public async Task<Recipe> Create(Recipe recipe)
         {
-            var entity = _dbContext.Recipe.Add(recipe);
+            var entity = await _dbContext.Recipe.AddAsync(recipe);
             return entity.Entity;
         }
 
-        public void Delete(Recipe recipe)
+        public async void Delete(Recipe recipe)
         {
             _dbContext.Recipe.Remove(recipe);
         }
 
-        public void Update(Recipe recipe)
+        public async void Update(Recipe recipe)
         {
             _dbContext.Recipe.Update(recipe);
         }
