@@ -10,7 +10,6 @@ namespace KitchenBook.Api.Controllers
 {
     [Route("recipe")]
     [ApiController]
-    
     public class RecipeController : ControllerBase
     {
         private readonly IRecipeRepository _recipeRepository;
@@ -47,10 +46,9 @@ namespace KitchenBook.Api.Controllers
         [Route("create")]
         public IActionResult Create([FromBody] RecipeDto recipeDto)
         {
-            Console.WriteLine("1341412444423323");
-            Console.WriteLine(recipeDto.Map().Title);
-            var createdRecipe = _recipeRepository.Create(recipeDto.Map());
-
+            //Если без мапинга или надо просто  создавать объект используя recipeDto?
+            var createdRecipe = _recipeRepository.Create(new Recipe(recipeDto.Title, recipeDto.Description,
+                recipeDto.CookingTime, recipeDto.Portions, recipeDto.Stars, recipeDto.Likes));
             _unitOfWork.Commit();
 
             return Ok(createdRecipe.Id);
