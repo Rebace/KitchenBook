@@ -1,31 +1,36 @@
-.header{
+.header {
     display: flex;
     justify-content: center;
 }
-.header-position{
+
+.header-position {
     margin: 40px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     max-width: 1202px;
     width: 100%;
-    .header__left-part{
+
+    .header__left-part {
         display: flex;
         justify-content: space-between;
         flex-direction: row;
         max-width: 523px;
         width: 100%;
-        .header__logo{
+
+        .header__logo {
             width: 99px;
             height: 29px;
         }
-        .header__menu{
+
+        .header__menu {
             display: flex;
             justify-content: space-between;
             flex-direction: row;
             max-width: 345px;
             width: 100%;
-            div{
+
+            div {
                 font-family: 'Montserrat', serif;
                 font-style: normal;
                 font-weight: 400;
@@ -35,7 +40,8 @@
             }
         }
     }
-    .header__right-part{
+
+    .header__right-part {
         display: flex;
         justify-content: space-between;
         flex-direction: row;
@@ -44,17 +50,20 @@
         width: 100%;
         position: relative;
         top: -3px;
-        .header__img-style{
+
+        .header__img-style {
             display: inline-block;
             border-radius: 50%;
             overflow: hidden;
             height: 38px;
-            img{
+
+            img {
                 padding: 11px;
                 background: #FDB100;
             }
         }
-        .header__text{
+
+        .header__text {
             font-family: 'Montserrat', serif;
             font-style: normal;
             font-weight: 600;
@@ -62,7 +71,8 @@
             line-height: 22px;
             color: #FDB100;
         }
-        .header__exit{
+
+        .header__exit {
             height: 18px;
             padding-left: 26px;
             border-left: 1px #FDB100 solid;
@@ -72,7 +82,8 @@
         }
     }
 }
-.recipes{
+
+.recipes {
     display: flex;
     flex-direction: column;
     align-items: center;
