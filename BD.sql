@@ -22,4 +22,3 @@ BEGIN
 		[Token] NVARCHAR(MAX),
 		[Description] NVARCHAR(MAX)
 	)
-END
