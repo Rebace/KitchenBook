@@ -1,0 +1,21 @@
+﻿<div class="main">
+    <div class="main__title">Войти</div>
+    <img class="main__close" src="assets/img/Close.svg" alt="Close" (click)="onSubmitClose()">
+    <form [formGroup]="loginForm">
+        <input type="login" class="form__login" placeholder="Логин" formControlName="login" required>
+        <div class="form__error"
+             *ngIf="loginForm.controls['login'].errors && !firstDispatch">Логин отсутсвует</div>
+        <input type="password" class="form__password" placeholder="Пароль" formControlName="password" required>
+        <div class="form__error"
+             *ngIf="loginForm.controls['password'].errors && !firstDispatch">Отсутствует пароль</div>
+        <div class="form__error"
+             *ngIf="!successfulLogin">Неверный логин или пароль</div>
+        <div class="form__buttons">
+            <button class="login-button button" (click)="login()">Войти</button>
+            <button class="cancel-button button" (click)="onSubmitClose()">Отмена</button>
+        </div>
+        <div class="form__link-register"><p (click)="onSubmitRegister()">У меня ещё нет аккаунта</p></div>
+    </form>
+</div>
+
+<div class="bg-form" (click)="onSubmitClose()"></div>
