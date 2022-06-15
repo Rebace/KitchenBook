@@ -2,17 +2,16 @@
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly RecipeDbContext _dbContext;
+        private readonly KitchenBookDbContext _kitchenBookDbContext;
 
-        public UnitOfWork(RecipeDbContext dbContext)
+        public UnitOfWork(KitchenBookDbContext kitchenBookDbContext)
         {
-            _dbContext = dbContext;
+            _kitchenBookDbContext = kitchenBookDbContext;
         }
 
         public void Commit()
         {
-            _dbContext.SaveChanges();
-
+            _kitchenBookDbContext.SaveChanges();
         }
     }
 }
