@@ -1,10 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace KitchenBook.Domain;
+﻿namespace KitchenBook.Domain;
 
 public class Recipe
 {
-    [Key]
     public int Id { get; private set; }
     public string Title { get; private set; }
     public string Description { get; private set; }

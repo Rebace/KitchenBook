@@ -4,7 +4,6 @@ namespace KitchenBook.Domain.UserModel;
 
 public class User
 {
-    [Key]
     public int Id { get; private set; }
     public string Name { get; private set; }
     public string Login { get; private set; }
@@ -17,9 +16,8 @@ public class User
     {
     }
 
-    public User(int id, string name, string login, string password, string description, string token)
+    public User(string name, string login, string password, string description, string token)
     {
-        Id = id;
         Name = name;
         Token = token;
         Login = login;

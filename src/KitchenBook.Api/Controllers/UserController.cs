@@ -1,7 +1,7 @@
 using KitchenBook.Api.MessageContracts;
 using KitchenBook.Api.MessageContracts.UserModel;
 using KitchenBook.Domain.UserModel;
-using KitchenBook.Infrastructure.Auxiliary;
+using KitchenBook.Infrastructure.Data.UserModel;
 using KitchenBook.Infrastructure.UoF;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,8 +25,8 @@ public class UserController : ControllerBase
     public async Task<IActionResult> Login(LoginDto loiginDto)
     {
         User user = await _userRepository.GetByLogin(loiginDto.Login);
-        string password = Hashing.ToSHA256(loiginDto.Password);
-        if (password != user.Password)
+
+        if (Hashing.ToSHA256(loiginDto.Password) != user.Password)
         {
             return BadRequest();
         }
@@ -37,7 +37,7 @@ public class UserController : ControllerBase
         _userRepository.Update(user);
         _unitOfWork.Commit();
 
-        HttpContext.Response.AppendTokenToCookies(token);
+        HttpContext.Response.Cookies.Append("Token", token);
         return Ok();
     }
 
@@ -50,17 +50,17 @@ public class UserController : ControllerBase
             return BadRequest();
         }
 
-        string token = Guid.NewGuid().ToString();
+            string token = Guid.NewGuid().ToString();
 
-        HttpContext.Response.AppendTokenToCookies(token);
+        HttpContext.Response.Cookies.Append("Token", token);
 
-        await _userRepository.Add(new User(
-            0,
-            loiginDto.Name,
-            loiginDto.Login,
-            Hashing.ToSHA256(loiginDto.Password),
-            null,
-            token));
+        var createdUser =
+            await _userRepository.Add(new User(
+                loiginDto.Name,
+                loiginDto.Login,
+                Hashing.ToSHA256(loiginDto.Password),
+                null,
+                token));
         _unitOfWork.Commit();
 
         return Ok();
@@ -78,7 +78,6 @@ public class UserController : ControllerBase
         }
 
         _userRepository.Update(new User(
-            userDto.Id,
             userDto.Name,
             userDto.Login,
             Hashing.ToSHA256(userDto.Password),

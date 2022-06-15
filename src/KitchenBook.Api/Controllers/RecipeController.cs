@@ -40,14 +40,8 @@ namespace KitchenBook.Api.Controllers
         [Route("create")]
         public async Task<IActionResult> Create([FromBody] RecipeDto recipeDto)
         {
-            var createdRecipe = await _recipeRepository.Create(new Recipe(
-                recipeDto.Title,
-                recipeDto.Description,
-                recipeDto.CookingTime,
-                recipeDto.Portions,
-                recipeDto.Stars,
-                recipeDto.Likes
-            ));
+            var createdRecipe = await _recipeRepository.Create(new Recipe(recipeDto.Title, recipeDto.Description,
+                recipeDto.CookingTime, recipeDto.Portions, recipeDto.Stars, recipeDto.Likes));
             _unitOfWork.Commit();
 
             return Ok(createdRecipe.Id);
