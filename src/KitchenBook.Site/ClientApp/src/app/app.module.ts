@@ -4,19 +4,31 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {RecipeListModule} from './recipe-list/recipe-list.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {HeaderComponent} from './shared/header/header.component';
+import {FooterComponent} from './shared/footer/footer.component';
+import {LoginComponent} from './shared/login/login.component';
+import {RegisterComponent} from './shared/register/register.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {UserService} from './shared/services/accountService';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    RecipeListModule,
-    BrowserAnimationsModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        FooterComponent,
+        LoginComponent,
+        RegisterComponent
+    ],
+    imports: [
+        BrowserModule,
+        RecipeListModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule
+    ],
+    providers: [UserService],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }
