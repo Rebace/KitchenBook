@@ -18,9 +18,15 @@ public class UserAuthenticationMiddleware
 
     public async Task Invoke(HttpContext context)
     {
-        if (context.Request.Path.Value.ToLower() == "/user/login"
-            || context.Request.Path.Value.ToLower() == "/user/register"
-            || context.Request.Path.Value.ToLower() == "/recipe/get-all")
+        List<String> listLinqMiddleware = new List<string>()
+        {
+            "/users/login",
+            "/users/register",
+            "/recipe/get-all",
+            "/users/update" // Для проверки
+        };
+
+        if (listLinqMiddleware.Contains(context.Request.Path.Value.ToLower()))
         {
             await _next(context);
             return;

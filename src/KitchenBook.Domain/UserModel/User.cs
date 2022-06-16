@@ -17,11 +17,18 @@ public class User
     {
     }
 
-    public User(int id, string name, string login, string password, string description, string token)
+    public User(string name, string login, string password, string description, string token)
     {
-        Id = id;
         Name = name;
         Token = token;
+        Login = login;
+        Password = password;
+        Description = description;
+    }
+
+    public void Edit(string name, string login, string password, string description)
+    {
+        Name = name;
         Login = login;
         Password = password;
         Description = description;

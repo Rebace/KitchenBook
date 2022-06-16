@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KitchenBook.Api.Controllers;
 
-[Route("user")]
+[Route("users")]
 [ApiController]
 public class UserController : ControllerBase
 {
@@ -22,10 +22,10 @@ public class UserController : ControllerBase
 
     [HttpPost]
     [Route("login")]
-    public async Task<IActionResult> Login(LoginDto loiginDto)
+    public async Task<IActionResult> Login(LoginDto loginDto)
     {
-        User user = await _userRepository.GetByLogin(loiginDto.Login);
-        string password = Hashing.ToSHA256(loiginDto.Password);
+        User user = await _userRepository.GetByLogin(loginDto.Login);
+        string password = Hashing.ToSHA256(loginDto.Password);
         if (password != user.Password)
         {
             return BadRequest();
@@ -38,27 +38,26 @@ public class UserController : ControllerBase
         _unitOfWork.Commit();
 
         HttpContext.Response.AppendTokenToCookies(token);
+        HttpContext.Response.AppendLoginToCookies(loginDto.Login);
         return Ok();
     }
 
     [HttpPost]
     [Route("register")]
-    public async Task<IActionResult> Register(LoginDto loiginDto)
+    public async Task<IActionResult> Register(RegisterDto registerDto)
     {
-        if (await _userRepository.GetByLogin(loiginDto.Login) != null)
+        User user = await _userRepository.GetByLogin(registerDto.Login);
+        if (user != null)
         {
             return BadRequest();
         }
 
         string token = Guid.NewGuid().ToString();
 
-        HttpContext.Response.AppendTokenToCookies(token);
-
         await _userRepository.Add(new User(
-            0,
-            loiginDto.Name,
-            loiginDto.Login,
-            Hashing.ToSHA256(loiginDto.Password),
+            registerDto.Name,
+            registerDto.Login,
+            Hashing.ToSHA256(registerDto.Password),
             null,
             token));
         _unitOfWork.Commit();
@@ -68,24 +67,30 @@ public class UserController : ControllerBase
 
     [HttpPost]
     [Route("update")]
-    public IActionResult Update([FromBody] UserDto userDto)
+    public async Task<IActionResult> Update([FromBody] UserDto userDto)
     {
         string login = HttpContext.Request.Cookies["Login"];
+        string token = HttpContext.Request.Cookies["Token"];
 
-        if (login != userDto.Login)
+        User user = await _userRepository.GetByLogin(login);
+        User userDtoCheck = await _userRepository.GetByLogin(userDto.Login);
+
+        if ((token != user.Token) || ((userDtoCheck != null) && (login != userDto.Login)))
         {
             return BadRequest();
         }
 
-        _userRepository.Update(new User(
-            userDto.Id,
+        user.Edit(
             userDto.Name,
             userDto.Login,
-            Hashing.ToSHA256(userDto.Password),
-            userDto.Description,
-            userDto.Token));
+            userDto.Password,
+            userDto.Description
+        );
 
+        _userRepository.Update(user);
         _unitOfWork.Commit();
+
+        HttpContext.Response.AppendLoginToCookies(userDto.Login);
 
         return Ok();
     }
