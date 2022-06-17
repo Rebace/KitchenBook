@@ -20,6 +20,16 @@ public class UserController : ControllerBase
         _unitOfWork = unitOfWork;
     }
 
+    [HttpGet]
+    [Route("authorization")]
+    public async Task<IActionResult> Authorization()
+    {
+        string login = HttpContext.Request.Cookies["Login"];
+        User user = await _userRepository.GetByLogin(login);
+
+        return Ok(user.Name);
+    }
+
     [HttpPost]
     [Route("login")]
     public async Task<IActionResult> Login(LoginDto loginDto)
@@ -70,12 +80,11 @@ public class UserController : ControllerBase
     public async Task<IActionResult> Update([FromBody] UserDto userDto)
     {
         string login = HttpContext.Request.Cookies["Login"];
-        string token = HttpContext.Request.Cookies["Token"];
 
         User user = await _userRepository.GetByLogin(login);
         User userDtoCheck = await _userRepository.GetByLogin(userDto.Login);
 
-        if ((token != user.Token) || ((userDtoCheck != null) && (login != userDto.Login)))
+        if ((userDtoCheck != null) && (login != userDto.Login))
         {
             return BadRequest();
         }
