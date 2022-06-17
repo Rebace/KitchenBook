@@ -9,7 +9,7 @@ namespace KitchenBook.Infrastructure.Configuration
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd().HasColumnType("int");
             builder.Property(x => x.Name).HasMaxLength(255).IsRequired();
             builder.Property(x => x.Token);
