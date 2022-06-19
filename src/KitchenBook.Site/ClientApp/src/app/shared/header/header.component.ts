@@ -17,7 +17,7 @@ export class HeaderComponent {
     constructor(private userService: UserService) {
     }
     public onInit() {
-        this.userService.authentication().subscribe(
+        this.userService.authorization().subscribe(
             (result) => {
                 this.userName = <string>result;
             }
