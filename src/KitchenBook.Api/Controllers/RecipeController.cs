@@ -1,5 +1,4 @@
 ﻿using KitchenBook.Api.ApiMessages;
-using KitchenBook.Api.MessageContracts;
 using KitchenBook.Api.MessageContracts.Mappers;
 using KitchenBook.Domain;
 using KitchenBook.Infrastructure.Repository;
@@ -41,9 +40,14 @@ namespace KitchenBook.Api.Controllers
         [Route("create")]
         public async Task<IActionResult> Create([FromBody] RecipeDto recipeDto)
         {
-            //Если без мапинга или надо просто  создавать объект используя recipeDto?
-            var createdRecipe = await _recipeRepository.Create(new Recipe(recipeDto.Title, recipeDto.Description,
-                recipeDto.CookingTime, recipeDto.Portions, recipeDto.Stars, recipeDto.Likes));
+            var createdRecipe = await _recipeRepository.Create(new Recipe(
+                recipeDto.Title,
+                recipeDto.Description,
+                recipeDto.CookingTime,
+                recipeDto.Portions,
+                recipeDto.Stars,
+                recipeDto.Likes
+            ));
             _unitOfWork.Commit();
 
             return Ok(createdRecipe.Id);
