@@ -1,7 +1,7 @@
 ﻿import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Recipe} from './shared/recipe.interface';
 import {Observable} from 'rxjs';
+import {Recipe} from '../interface/recipe.interface';
 
 @Injectable()
 export class RecipeService {

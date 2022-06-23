@@ -1,0 +1,97 @@
+﻿<div class="recipe-add">
+    <div class="recipe-add__position">
+        <div class="recipe-add__navigate">
+            <img src="assets/img/arrow_back.svg" alt="Arrow">
+            <div class="recipe-add__back">Назад</div>
+        </div>
+        <div class="recipe-add__top-bar">
+            <div class="recipe-add__title">Добавить новый рецепт</div>
+            <div class="button__recipe-add" (click)="recipePublic()">Опубликовать</div>
+        </div>
+
+        <form [formGroup]="recipeForm">
+            <div class="main-form">
+                <div class="main-form__img">
+                    <div class="main-form__dashed">
+                        <img src="assets/img/Download.svg" alt="Download">
+                        <div class="main-form__description">
+                            Загрузите фото готового блюда
+                        </div>
+                    </div>
+                </div>
+                <div class="main-form__right">
+                    <input type="text" placeholder="Название рецепта" formControlName="title" required>
+                    <textarea placeholder="Краткое описание (150 символов)" formControlName="description" required></textarea>
+
+                    <mat-form-field class="example-chip-list" appearance="legacy">
+                        <mat-label>Добавить теги</mat-label>
+                        <mat-chip-list #chipList aria-label="Fruit selection">
+                            <mat-chip *ngFor="let fruit of fruits" (removed)="remove(fruit)">
+                                {{fruit}}
+                                <button matChipRemove>
+                                    <mat-icon>cancel</mat-icon>
+                                </button>
+                            </mat-chip>
+                            <input placeholder="Новый тег..."
+                                   [matChipInputFor]="chipList"
+                                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                   [matChipInputAddOnBlur]="addOnBlur"
+                                   (matChipInputTokenEnd)="add($event)">
+                        </mat-chip-list>
+                    </mat-form-field>
+
+                    <div class="form__selected">
+                        <div class="form__select">
+                            <select class="main-form__select" formControlName="cookingTime" ngModel="Время готовки">
+                                <option selected  disabled>Время готовки</option>
+                                <option *ngFor="let time of timeList" [ngValue]="time">
+                                    {{time}}
+                                </option>
+                            </select>
+                            <span>Минут</span>
+                            <div class="validation" *ngIf="(recipeForm.controls['cookingTime'].value == null)">* поле обязательное</div>
+                        </div>
+                        <div class="form__select">
+                            <select class="main-form__select" formControlName="portions" ngModel="Порций в блюде">
+                                <option selected  disabled>Порций в блюде</option>
+                                <option *ngFor="let portion of portionList" [ngValue]="portion">
+                                    {{portion}}
+                                </option>
+                            </select>
+                            <span>Персон</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="auxiliary-forms">
+                <div class="ingredients">
+                    <div class="ingredients__title">Ингредиенты</div>
+                    <div class="ingredient" *ngFor="let ingredient of ingredients">
+                        <img class="ingredient__close" src="assets/img/Close.svg" alt="Close" (click)="deleteIngredient(ingredient)">
+                        <div class="ingredient__group">
+                            <input type="text" placeholder="Заголовок для ингридиентов" required [(ngModel)]="ingredient.title" [ngModelOptions]="{standalone: true}" #ing="ngModel">
+                            <div *ngIf="!ing.valid">невалид</div>
+                            <textarea placeholder="Список подуктов для категории" required  [(ngModel)]="ingredient.description" [ngModelOptions]="{standalone: true}"></textarea>
+                        </div>
+                    </div>
+                    <div class="button" (click)="addIngredient()">
+                        <img src="assets/img/Add.svg" alt="Add">
+                        Добавить заголовок
+                    </div>
+                </div>
+                <div class="steps">
+                    <div class="step" *ngFor="let step of steps">
+                        <div class="step__title">Шаг {{step.id}}</div>
+                        <img class="step__close" src="assets/img/Close.svg" alt="Close" (click)="deleteStep(step)">
+                        <textarea placeholder="Описание шага" required  [(ngModel)]="step.description" [ngModelOptions]="{standalone: true}"></textarea>
+                    </div>
+                    <div class="button" (click)="addStep()">
+                        <img src="assets/img/Add.svg" alt="Add">
+                        Добавить шаг
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

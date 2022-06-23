@@ -1,6 +1,6 @@
 ﻿import {Component, OnInit} from '@angular/core';
 import {RecipeService} from '../recipe.service';
-import {Recipe} from '../shared/recipe.interface';
+import {Recipe} from '../../interface/recipe.interface';
 
 @Component({
     selector: 'tl-recipe-list',
