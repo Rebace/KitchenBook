@@ -10,6 +10,7 @@ import {LoginComponent} from './shared/login/login.component';
 import {RegisterComponent} from './shared/register/register.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UserService} from './shared/services/accountService';
+import {RecipeAddModule} from './recipe-add/recipe-add.module';
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import {UserService} from './shared/services/accountService';
     imports: [
         BrowserModule,
         RecipeListModule,
+        RecipeAddModule,
         BrowserAnimationsModule,
         AppRoutingModule,
         FormsModule,
