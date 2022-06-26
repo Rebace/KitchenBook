@@ -26,7 +26,7 @@
                     <mat-form-field class="example-chip-list" appearance="legacy">
                         <mat-label>Добавить теги</mat-label>
                         <mat-chip-list #chipList aria-label="Fruit selection">
-                            <mat-chip *ngFor="let fruit of fruits" (removed)="remove(fruit)">
+                            <mat-chip *ngFor="let fruit of tags" (removed)="remove(fruit)">
                                 {{fruit}}
                                 <button matChipRemove>
                                     <mat-icon>cancel</mat-icon>
@@ -67,12 +67,11 @@
             <div class="auxiliary-forms">
                 <div class="ingredients">
                     <div class="ingredients__title">Ингредиенты</div>
-                    <div class="ingredient" *ngFor="let ingredient of ingredients">
-                        <img class="ingredient__close" src="assets/img/Close.svg" alt="Close" (click)="deleteIngredient(ingredient)">
+                    <div class="ingredient" *ngFor="let ingredient of ingredients; let i = index">
+                        <img class="ingredient__close" src="assets/img/Close.svg" alt="Close" (click)="deleteIngredient(i)">
                         <div class="ingredient__group">
-                            <input type="text" placeholder="Заголовок для ингридиентов" required [(ngModel)]="ingredient.title" [ngModelOptions]="{standalone: true}" #ing="ngModel">
-                            <div *ngIf="!ing.valid">невалид</div>
-                            <textarea placeholder="Список подуктов для категории" required  [(ngModel)]="ingredient.description" [ngModelOptions]="{standalone: true}"></textarea>
+                            <input type="text" placeholder="Заголовок для ингридиентов" required formControlName="{{ingredient.title}}">
+                            <textarea placeholder="Список подуктов для категории" required  formControlName="{{ingredient.description}}"></textarea>
                         </div>
                     </div>
                     <div class="button" (click)="addIngredient()">
@@ -81,10 +80,10 @@
                     </div>
                 </div>
                 <div class="steps">
-                    <div class="step" *ngFor="let step of steps">
-                        <div class="step__title">Шаг {{step.id}}</div>
-                        <img class="step__close" src="assets/img/Close.svg" alt="Close" (click)="deleteStep(step)">
-                        <textarea placeholder="Описание шага" required  [(ngModel)]="step.description" [ngModelOptions]="{standalone: true}"></textarea>
+                    <div class="step" *ngFor="let step of steps; let i = index">
+                        <div class="step__title">Шаг {{i + 1}}</div>
+                        <img class="step__close" src="assets/img/Close.svg" alt="Close" (click)="deleteStep(i)">
+                        <textarea placeholder="Описание шага" required formControlName="{{step.description}}"></textarea>
                     </div>
                     <div class="button" (click)="addStep()">
                         <img src="assets/img/Add.svg" alt="Add">

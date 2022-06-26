@@ -1,7 +1,7 @@
 ﻿import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {Recipe} from '../interface/recipe.interface';
+import {RecipeFull, RecipeShort} from '../interface/recipe.interface';
 
 @Injectable()
 export class RecipeService {
@@ -10,15 +10,15 @@ export class RecipeService {
     constructor(private http: HttpClient) {
     }
 
-    public getAll(): Observable<Recipe[]> {
-        return this.http.get<Recipe[]>(`${this._recipeControllerLink}get-all`);
+    public getAll(): Observable<RecipeShort[]> {
+        return this.http.get<RecipeShort[]>(`${this._recipeControllerLink}get-all`);
     }
 
     public getById(recipeId: number) {
         return this.http.get(`${this._recipeControllerLink}${recipeId}`);
     }
 
-    public create(recipe: Recipe) {
+    public addRecipe(recipe: RecipeFull) {
         return this.http.post(`${this._recipeControllerLink}create`, recipe);
     }
 
