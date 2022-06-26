@@ -1,5 +1,4 @@
-﻿using KitchenBook.Domain;
-using KitchenBook.Domain.UserModel;
+﻿using KitchenBook.Domain.UserModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

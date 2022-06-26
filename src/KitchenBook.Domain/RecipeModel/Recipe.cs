@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using KitchenBook.Domain.RecipeModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace KitchenBook.Domain;
 
@@ -12,13 +13,17 @@ public class Recipe
     public int Portions { get; private set; }
     public int Stars { get; private set; }
     public int Likes { get; private set; }
+    public List<TagRecipe> Tags { get; private set; }
+    public List<RecipeStep> RecipeSteps { get; private set; }
+    public List<RecipeIngredient> RecipeIngredients { get; private set; }
+    public int UserId { get; private set; }
 
     // Workaround for EF
     protected Recipe()
     {
     }
 
-    public Recipe(string title, string description, int cookingTime, int portions, int stars, int likes)
+    public Recipe(string title, string description, int cookingTime, int portions, int stars, int likes, int userId, List<Tag> tags, List<RecipeStep> steps, List<RecipeIngredient> ingredients)
     {
         Title = title;
         Description = description;
@@ -26,5 +31,9 @@ public class Recipe
         Portions = portions;
         Stars = stars;
         Likes = likes;
+        UserId = userId;
+        RecipeSteps = steps;
+        RecipeIngredients = ingredients;
+        Tags = tags;
     }
 }
