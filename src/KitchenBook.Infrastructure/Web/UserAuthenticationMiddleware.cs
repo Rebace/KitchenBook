@@ -18,15 +18,14 @@ public class UserAuthenticationMiddleware
 
     public async Task Invoke(HttpContext context)
     {
-        List<String> listLinqMiddleware = new List<string>()
+        List<String> skippedRouteList = new List<string>()
         {
             "/users/login",
             "/users/register",
-            "/recipe/get-all",
-            "/users/update" // Для проверки
+            "/recipe/get-all"
         };
 
-        if (listLinqMiddleware.Contains(context.Request.Path.Value.ToLower()))
+        if (skippedRouteList.Contains(context.Request.Path.Value.ToLower()))
         {
             await _next(context);
             return;
