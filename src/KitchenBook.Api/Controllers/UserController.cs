@@ -21,13 +21,15 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    [Route("authorization")]
-    public async Task<IActionResult> Authorization()
+    [Route("get-authorized")]
+    public async Task<IActionResult> GetAuthorized()
     {
         string login = HttpContext.Request.Cookies["Login"];
         User user = await _userRepository.GetByLogin(login);
 
-        return Ok(user.Name);
+        UserDto userDto = new UserDto(user.Name, user.Description);
+
+        return Ok(userDto);
     }
 
     [HttpPost]
@@ -54,9 +56,9 @@ public class UserController : ControllerBase
 
     [HttpPost]
     [Route("register")]
-    public async Task<IActionResult> Register(RegisterDto registerDto)
+    public async Task<IActionResult> Register(UpsertUserDto upsertUserDto)
     {
-        User user = await _userRepository.GetByLogin(registerDto.Login);
+        User user = await _userRepository.GetByLogin(upsertUserDto.Login);
         if (user != null)
         {
             return BadRequest();
@@ -65,9 +67,9 @@ public class UserController : ControllerBase
         string token = Guid.NewGuid().ToString();
 
         await _userRepository.Add(new User(
-            registerDto.Name,
-            registerDto.Login,
-            Hashing.ToSHA256(registerDto.Password),
+            upsertUserDto.Name,
+            upsertUserDto.Login,
+            Hashing.ToSHA256(upsertUserDto.Password),
             null,
             token));
         _unitOfWork.Commit();
@@ -77,29 +79,29 @@ public class UserController : ControllerBase
 
     [HttpPost]
     [Route("update")]
-    public async Task<IActionResult> Update([FromBody] UserDto userDto)
+    public async Task<IActionResult> Update([FromBody] UpsertUserDto upsertUserDto)
     {
         string login = HttpContext.Request.Cookies["Login"];
 
         User user = await _userRepository.GetByLogin(login);
-        User userDtoCheck = await _userRepository.GetByLogin(userDto.Login);
+        User userDtoCheck = await _userRepository.GetByLogin(upsertUserDto.Login);
 
-        if ((userDtoCheck != null) && (login != userDto.Login))
+        if ((userDtoCheck != null) && (login != upsertUserDto.Login))
         {
             return BadRequest();
         }
 
         user.Edit(
-            userDto.Name,
-            userDto.Login,
-            userDto.Password,
-            userDto.Description
+            upsertUserDto.Name,
+            upsertUserDto.Login,
+            upsertUserDto.Password,
+            upsertUserDto.Description
         );
 
         _userRepository.Update(user);
         _unitOfWork.Commit();
 
-        HttpContext.Response.AppendLoginToCookies(userDto.Login);
+        HttpContext.Response.AppendLoginToCookies(upsertUserDto.Login);
 
         return Ok();
     }

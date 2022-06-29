@@ -70,8 +70,8 @@
                     <div class="ingredient" *ngFor="let ingredient of ingredients; let i = index">
                         <img class="ingredient__close" src="assets/img/Close.svg" alt="Close" (click)="deleteIngredient(i)">
                         <div class="ingredient__group">
-                            <input type="text" placeholder="Заголовок для ингридиентов" required formControlName="{{ingredient.title}}">
-                            <textarea placeholder="Список подуктов для категории" required  formControlName="{{ingredient.description}}"></textarea>
+                            <input type="text" placeholder="Заголовок для ингридиентов" required formControlName="{{ingredient.Title}}">
+                            <textarea placeholder="Список подуктов для категории" required  formControlName="{{ingredient.Description}}"></textarea>
                         </div>
                     </div>
                     <div class="button" (click)="addIngredient()">
@@ -83,7 +83,7 @@
                     <div class="step" *ngFor="let step of steps; let i = index">
                         <div class="step__title">Шаг {{i + 1}}</div>
                         <img class="step__close" src="assets/img/Close.svg" alt="Close" (click)="deleteStep(i)">
-                        <textarea placeholder="Описание шага" required formControlName="{{step.description}}"></textarea>
+                        <textarea placeholder="Описание шага" required formControlName="{{step.Description}}"></textarea>
                     </div>
                     <div class="button" (click)="addStep()">
                         <img src="assets/img/Add.svg" alt="Add">

@@ -30,15 +30,6 @@ namespace KitchenBook.Api
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "Recipe", Version = "v1" }); });
 
-            services.AddCors(options =>
-            {
-                options.AddPolicy("CorsPolicy",
-                    builder =>
-                    {
-                        builder.WithOrigins(new string[] { "http://localhost:4200" })
-                            .AllowAnyMethod().AllowAnyHeader();
-                    });
-            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

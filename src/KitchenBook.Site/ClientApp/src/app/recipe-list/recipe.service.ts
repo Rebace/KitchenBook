@@ -5,7 +5,7 @@ import {RecipeFull, RecipeShort} from '../interface/recipe.interface';
 
 @Injectable()
 export class RecipeService {
-    private _recipeControllerLink = 'http://localhost:5000/recipe/';
+    private _recipeControllerLink = '/api/recipe/';
 
     constructor(private http: HttpClient) {
     }
@@ -18,7 +18,7 @@ export class RecipeService {
         return this.http.get(`${this._recipeControllerLink}${recipeId}`);
     }
 
-    public addRecipe(recipe: RecipeFull) {
+    public addRecipe(recipe: RecipeShort) {
         return this.http.post(`${this._recipeControllerLink}create`, recipe);
     }
 

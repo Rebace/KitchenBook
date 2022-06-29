@@ -16,6 +16,7 @@ namespace KitchenBook.Infrastructure.Configuration
             builder.Property(x => x.Portions).HasColumnType("int");
             builder.Property(x => x.Stars).HasColumnType("int");
             builder.Property(x => x.Likes).HasColumnType("int");
+            builder.Property(x => x.UserId).HasColumnType("int");
         }
     }
 }

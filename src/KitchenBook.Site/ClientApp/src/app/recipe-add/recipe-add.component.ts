@@ -61,35 +61,35 @@ export class RecipeAddComponent {
     }
 
     public addStep(): void {
-        let step: Step = {id: this.steps.length, description: "stepDescription" + this.steps.length};
+        let step: Step = {Id: this.steps.length, Description: "stepDescription" + this.steps.length};
         this.steps.push(step);
-        this.recipeForm.addControl(step.description, new FormControl("", Validators.required));
+        this.recipeForm.addControl(step.Description, new FormControl("", Validators.required));
     }
 
     public deleteStep(i: number): void {
-        let step: Step = {id: i, description: "stepDescription" + i};
+        let step: Step = {Id: i, Description: "stepDescription" + i};
         if (this.steps.length > 1) {
-            this.recipeForm.removeControl(step.description);
+            this.recipeForm.removeControl(step.Description);
             this.steps.splice(i, 1);
         }
     }
 
     public addIngredient(): void {
         let ingredient: Ingredient = {
-            id: this.ingredients.length,
-            title: "ingredientTitle" + this.ingredients.length,
-            description: "ingredientDescription" + this.ingredients.length
+            Id: this.ingredients.length,
+            Title: "ingredientTitle" + this.ingredients.length,
+            Description: "ingredientDescription" + this.ingredients.length
         };
         this.ingredients.push(ingredient);
-        this.recipeForm.addControl(ingredient.title, new FormControl("", Validators.required));
-        this.recipeForm.addControl(ingredient.description, new FormControl("", Validators.required));
+        this.recipeForm.addControl(ingredient.Title, new FormControl("", Validators.required));
+        this.recipeForm.addControl(ingredient.Description, new FormControl("", Validators.required));
     }
 
     public deleteIngredient(i: number): void {
-        let ingredient: Ingredient = {id: i, title: "ingredientTitle" + i, description: "ingredientDescription" + i};
+        let ingredient: Ingredient = {Id: i, Title: "ingredientTitle" + i, Description: "ingredientDescription" + i};
         if (this.ingredients.length > 1) {
-            this.recipeForm.removeControl(ingredient.title);
-            this.recipeForm.removeControl(ingredient.description);
+            this.recipeForm.removeControl(ingredient.Title);
+            this.recipeForm.removeControl(ingredient.Description);
             this.ingredients.splice(i, 1);
         }
     }
@@ -101,18 +101,18 @@ export class RecipeAddComponent {
             return;
         }
 
-        let stepsRecipe: Array<Step> = [];
+        let stepsRecipe: Step[] = [];
         for (let i = 0; i < this.steps.length; i++) {
-            let step: Step = {id: i, description: this.recipeForm.controls[this.steps[i].description].value};
+            let step: Step = {Id: i, Description: this.recipeForm.controls[this.steps[i].Description].value};
             stepsRecipe.push(step);
         }
 
-        let ingredientsRecipe: Array<Ingredient> = [];
+        let ingredientsRecipe: Ingredient[] = [];
         for (let i = 0; i < this.ingredients.length; i++) {
             let ingredient: Ingredient = {
-                id: i,
-                title: this.recipeForm.controls[this.ingredients[i].title].value,
-                description: this.recipeForm.controls[this.ingredients[i].description].value
+                Id: i,
+                Title: this.recipeForm.controls[this.ingredients[i].Title].value,
+                Description: this.recipeForm.controls[this.ingredients[i].Description].value
             };
             ingredientsRecipe.push(ingredient);
         }
@@ -121,23 +121,14 @@ export class RecipeAddComponent {
             id: 0,
             title: this.recipeForm.controls["title"].value,
             description: this.recipeForm.controls["description"].value,
-            tags: this.tags,
             cookingTime: this.recipeForm.controls["cookingTime"].value,
             portions: this.recipeForm.controls["portions"].value,
             stars: 0,
             likes: 0
         }
 
-        let request: RecipeFull = {
-            recipeShort: recipe,
-            recipeSteps: stepsRecipe,
-            recipeIngredients: ingredientsRecipe
-        }
-
-        this._recipeService.addRecipe(request).subscribe(
+        this._recipeService.addRecipe(recipe).subscribe(
             () => this.router.navigateByUrl('/')
         )
-
-        console.log(request)
     }
 }

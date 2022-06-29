@@ -60,5 +60,8 @@ public class UserAuthenticationMiddleware
 
             await context.Response.WriteAsync("");
         }
+
+        await _next(context);
+        return;
     }
 }

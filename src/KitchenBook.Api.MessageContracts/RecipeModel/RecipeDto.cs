@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using KitchenBook.Domain;
-
-namespace KitchenBook.Api.ApiMessages
+﻿namespace KitchenBook.Api.ApiMessages
 {
     public class RecipeDto
     {

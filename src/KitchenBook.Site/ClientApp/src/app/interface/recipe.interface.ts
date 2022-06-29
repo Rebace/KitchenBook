@@ -5,7 +5,6 @@ export interface RecipeShort {
     id: number;
     title: string;
     description: string;
-    tags: string[];
     cookingTime: number;
     portions: number;
     stars: number;
@@ -13,7 +12,13 @@ export interface RecipeShort {
 }
 
 export interface RecipeFull {
-    recipeShort: RecipeShort;
-    recipeSteps: Step[];
-    recipeIngredients: Ingredient[];
+    id: number;
+    title: string;
+    description: string;
+    cookingTime: number;
+    portions: number;
+    stars: number;
+    likes: number;
+    RecipeSteps: Step[];
+    RecipeIngredients: Ingredient[];
 }

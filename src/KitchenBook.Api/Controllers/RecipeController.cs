@@ -1,6 +1,7 @@
 ﻿using KitchenBook.Api.ApiMessages;
 using KitchenBook.Api.MessageContracts.Mappers;
 using KitchenBook.Domain;
+using KitchenBook.Domain.UserModel;
 using KitchenBook.Infrastructure.Repository;
 using KitchenBook.Infrastructure.UoF;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +14,13 @@ namespace KitchenBook.Api.Controllers
     {
         private readonly IRecipeRepository _recipeRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserRepository _userRepository;
 
-        public RecipeController(IRecipeRepository recipeRepository, IUnitOfWork unitOfWork)
+        public RecipeController(IRecipeRepository recipeRepository, IUnitOfWork unitOfWork, IUserRepository userRepository)
         {
             _recipeRepository = recipeRepository;
             _unitOfWork = unitOfWork;
+            _userRepository = userRepository;
         }
 
         [HttpGet]
@@ -40,17 +43,21 @@ namespace KitchenBook.Api.Controllers
         [Route("create")]
         public async Task<IActionResult> Create([FromBody] RecipeDto recipeDto)
         {
+            string login = HttpContext.Request.Cookies["Login"];
+            User user = await _userRepository.GetByLogin(login);
+
             var createdRecipe = await _recipeRepository.Create(new Recipe(
                 recipeDto.Title,
                 recipeDto.Description,
                 recipeDto.CookingTime,
                 recipeDto.Portions,
                 recipeDto.Stars,
-                recipeDto.Likes
+                recipeDto.Likes,
+                0
             ));
             _unitOfWork.Commit();
 
-            return Ok(createdRecipe.Id);
+            return Ok();
         }
 
         [HttpDelete]
