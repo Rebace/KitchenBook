@@ -2,11 +2,11 @@
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
-import {Step} from '../interface/step.interface';
-import {Ingredient} from '../interface/ingredient.interface';
 import {Router} from '@angular/router';
-import {RecipeService} from '../recipe-list/recipe.service';
-import {RecipeFull, RecipeShort} from '../interface/recipe.interface';
+import { Step } from 'src/app/interface/step.interface';
+import {Ingredient} from '../../interface/ingredient.interface';
+import {RecipeService} from '../../services/recipe.service';
+import {RecipeShort} from '../../interface/recipe.interface';
 
 @Component({
     selector: 'tl-recipe-add',

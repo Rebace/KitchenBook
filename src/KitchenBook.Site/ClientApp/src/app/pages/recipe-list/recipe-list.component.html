@@ -1,0 +1,13 @@
+﻿<div class="button__navigate">
+    <div class="button__recipe-add" (click)="onSubmitRedirection('recipe-add')">
+        <img src="assets/img/AddWhite.svg" alt="Add">
+        Добавить рецепт
+    </div>
+</div>
+
+<div class="recipes">
+  <tl-recipe
+  *ngFor="let recipe of recipes"
+  [recipe]="recipe"
+  ></tl-recipe>
+</div>

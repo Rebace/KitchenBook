@@ -1,0 +1,37 @@
+.recipes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button__navigate {
+    display: flex;
+    justify-content: right;
+    max-width: 1550px;
+    width: 100%;
+}
+
+.button__recipe-add {
+    color: #FFFFFF;
+    background-color: #FDB100;
+    border-radius: 16px;
+    position: relative;
+    width: 320px;
+    border: 1px solid #FDB100;
+    padding: 20px 0 20px 39px;
+    font-family: 'Montserrat', serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 28px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 40px;
+
+
+    img {
+        position: absolute;
+        left: 39px;
+        top: 30px;
+    }
+}

@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {RecipeShort} from '../../../interface/recipe.interface';
+import {RecipeShort} from '../../interface/recipe.interface';
 
 @Component({
     selector: 'tl-recipe',

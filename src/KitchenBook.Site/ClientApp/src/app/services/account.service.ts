@@ -1,9 +1,8 @@
 ﻿import {HttpClient} from '@angular/common/http';
-import {Authenticate} from '../models/authenticate';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {RecipeShort} from '../../interface/recipe.interface';
-import {User} from '../models/user';
+import {User} from '../interface/user.interface';
+import {Authenticate} from '../interface/authenticate.interface';
 
 @Injectable()
 export class UserService {

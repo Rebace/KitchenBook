@@ -1,15 +1,16 @@
 ﻿import {Component, OnInit} from '@angular/core';
-import {RecipeService} from '../recipe.service';
 import {RecipeShort} from '../../interface/recipe.interface';
+import {Router} from '@angular/router';
+import {RecipeService} from '../../services/recipe.service';
 
 @Component({
     selector: 'tl-recipe-list',
-    templateUrl: 'recipe-list-page.component.html',
-    styleUrls: ['recipe-list-page.component.scss']
+    templateUrl: 'recipe-list.component.html',
+    styleUrls: ['recipe-list.component.scss']
 })
 
 export class RecipeListPageComponent implements OnInit {
-    constructor(private recipeService: RecipeService) {
+    constructor(private recipeService: RecipeService, private router: Router) {
     }
 
     public recipes: Array<RecipeShort> = [];
@@ -21,5 +22,10 @@ export class RecipeListPageComponent implements OnInit {
                 this.recipes.push(<RecipeShort>recipe);
             });
         });
+    }
+
+    public onSubmitRedirection(linq: string) {
+        linq = '/' + linq;
+        this.router.navigateByUrl(linq)
     }
 }

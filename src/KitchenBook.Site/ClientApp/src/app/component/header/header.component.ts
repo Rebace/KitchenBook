@@ -1,7 +1,7 @@
 ﻿import {Component, Input, NgModule} from '@angular/core';
-import {UserService} from '../services/account.service';
 import {Router} from '@angular/router';
-import {User} from '../models/user';
+import {UserService} from '../../services/account.service';
+import {User} from '../../interface/user.interface';
 
 @Component({
     selector: 'app-header',
@@ -19,7 +19,8 @@ export class HeaderComponent {
     }
 
     public ngOnInit() {
-        if ((getCookie('Login') == null) || (getCookie('Token') == null))
+        if ((getCookie('Login') == null) || (getCookie('Token') == null) ||
+            (getCookie('Login') == '') || (getCookie('Token') == ''))
         {
             return;
         }

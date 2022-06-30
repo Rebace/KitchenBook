@@ -2,15 +2,15 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {RecipeListModule} from './recipe-list/recipe-list.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HeaderComponent} from './shared/header/header.component';
-import {FooterComponent} from './shared/footer/footer.component';
-import {LoginComponent} from './shared/login/login.component';
-import {RegisterComponent} from './shared/register/register.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {RecipeAddModule} from './recipe-add/recipe-add.module';
-import {UserService} from './shared/services/account.service';
+import { HeaderComponent } from './component/header/header.component';
+import { FooterComponent } from './component/footer/footer.component';
+import { LoginComponent } from './component/login/login.component';
+import { RegisterComponent } from './component/register/register.component';
+import { RecipeListModule } from './pages/recipe-list/recipe-list.module';
+import { RecipeAddModule } from './pages/recipe-add/recipe-add.module';
+import {UserService} from './services/account.service';
 
 @NgModule({
     declarations: [
